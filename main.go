@@ -16,11 +16,11 @@ import (
 const useHighPerformanceRenderer = false
 
 var (
-	titleStyle = func() lipgloss.Style {
-		b := lipgloss.RoundedBorder()
-		b.Right = "├"
-		return lipgloss.NewStyle().BorderStyle(b).Padding(0, 1)
-	}()
+  titleStyle = func() lipgloss.Style {
+    b := lipgloss.RoundedBorder()
+    b.Right = "├"
+    return lipgloss.NewStyle().BorderStyle(b).Padding(0, 1)
+  }()
   inputStyle = func() lipgloss.Style {
     b := lipgloss.RoundedBorder()
     return lipgloss.NewStyle().BorderStyle(b).Padding(0, 1)
@@ -64,8 +64,8 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
   switch msg := msg.(type) {
   case tea.WindowSizeMsg:
-		headerHeight := lipgloss.Height(m.headerView())
-		footerHeight := lipgloss.Height(m.footerView())
+    headerHeight := lipgloss.Height(m.headerView())
+    footerHeight := lipgloss.Height(m.footerView())
     verticalMarginHeight := headerHeight + footerHeight
 
     if !m.ready {
@@ -105,7 +105,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
   m.message, cmd = m.message.Update(msg)
   cmds = append(cmds, cmd)
-  
+
   return m, tea.Batch(cmds...)
 }
 
@@ -129,13 +129,13 @@ func (m model) View() string {
     return "\n  Initializing..."
   }
 
-	return fmt.Sprintf("%s\n%s\n%s", m.headerView(), m.viewport.View(), m.footerView())
+  return fmt.Sprintf("%s\n%s\n%s", m.headerView(), m.viewport.View(), m.footerView())
 }
 
 func (m model) headerView() string {
   title := titleStyle.Render("Bobacom – " + m.portName + " @ " + fmt.Sprintf("%d", m.baudRate) + " baud")
-	line := strings.Repeat("─", max(0, m.viewport.Width-lipgloss.Width(title)))
-	return lipgloss.JoinHorizontal(lipgloss.Center, title, line)
+  line := strings.Repeat("─", max(0, m.viewport.Width-lipgloss.Width(title)))
+  return lipgloss.JoinHorizontal(lipgloss.Center, title, line)
 }
 
 func (m model) footerView() string {
@@ -184,7 +184,7 @@ func main() {
     m,
     tea.WithAltScreen(),
     tea.WithMouseCellMotion(),
-  )
+    )
 
   go func() {
     for {
